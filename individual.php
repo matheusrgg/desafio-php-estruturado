@@ -18,7 +18,7 @@
             </div>
 
 
-            <div class='row'>
+            <div class="row">
                         <?php if(isset($produtos)&& $produtos !=[]) { ?>
 
 
@@ -32,36 +32,40 @@
 
 
                         <div class="col-4">
-                        <img src="<?php echo $produto["imagem"];?>" class="img-fluid" alt=""> 
+                        <img src="<?php echo $produto["nomeImagem"];?>" class="img-fluid" alt=""> 
                         </div>
 
                         <div class="col-8">
-                        <h1><?php echo $produto['nomeProduto'] ?></h1>
+                            <h1><?php echo $produto['nomeProduto'] ?></h1>
 
-                        <h3>Categoria</h3>
-                        <h4><?php echo $produto["nomeCategoria"]; ?></h4>            
-                        
-                                
+                            <h3>Categoria</h3>
+                            <h4><?php echo $produto["nomeCategoria"]; ?></h4>            
+                            
+                                    
 
-                        <h3>Descrição</h3>
-                        <h4><?php echo $produto ['nomeDescricao'] ?></h4>
+                            <h3>Descrição</h3>
+                            <h4><?php echo $produto ['nomeDescricao'] ?></h4>
 
-                                                                        
-                        <div class="d-flex justify-content-between">
-                            <p>Quantidade em estoque</p>
-                            <p><?php echo $produto['nomeQuantidade'] ?></p>
-                            <p>Preco do produto. R$</p>
-                            <p><?php echo $produto['nomePreco'] ?></p>
-                        </div>
+                                                                            
+                            <div class="d-flex justify-content-between">
+                                <p>Quantidade em estoque</p>
+                                <p><?php echo $produto['nomeQuantidade'] ?></p>
+                                <p>Preco do produto. R$</p>
+                                <p><?php echo $produto['nomePreco'] ?></p>
+                            </div>
+                        </div>   
 
                         <div class="pr-5"> 
                             <p></p>
                         </div>
-                    </div>
+                        </div>
 
 
                 <?php }?>
                 <?php }?>
+                            <?php } else { ?>
+                            <h1>Náo tem produto cadastrado</h1>
+                            <?php } ?>
 
         </div>
 

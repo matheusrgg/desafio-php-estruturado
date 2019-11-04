@@ -1,86 +1,6 @@
 
 
-<?php
-    function cadastrarProduto ($nomeProduto, $nomeCategoria , $nomeDescricao , $nomeQuantidade , $nomePreco , $nomeImagem ){
-      $nomeArquivo="produto.json";
-
-      if(file_exists($nomeArquivo)){
-
-        //abrindo e pegando info do arquivo
-        $arquivo = file_get_contents($nomeArquivo);
-
-        //transformando o Json em arrray
-
-        $produtos = json_decode ($arquivo, true);
-      
-        $produtos[]= ["nome"=>$nomeProduto, "categoria"=>$nomeCategoria ,"descricao"=>$nomeDescricao, "quantidade"=>$nomeQuantidade, "preco"=>$nomePreco, "imagem"=>$nomeImagem];
-        $json = json_encode($produtos);
-
-
-        //fechando novamente para exportar
-        $deuCerto = file_put_contents($nomeArquivo, $json);
-        if($deuCerto){
-            return "Deu certo brother";
-        }else {
-            return "Não deu bom";
-        }
-        var_dump($produtos);
-      
-
-      
-    }else{
-        
-      $produtos = [];
-
-      //array_push()
-
-      $produtos[]= ["nome"=>$nomeProduto, "categoria"=>$nomeCategoria ,"descricao"=>$nomeDescricao, "quantidade"=>$nomeQuantidade, "preco"=>$nomePreco, "imagem"=>$nomeImagem];
-      
-          //transformando array em json
-      $json = json_encode($produtos);
-          //salvando o json dentro de um arquivo
-      $deuCerto = file_put_contents($nomeArquivo, $json);
-
-      if($deuCerto){
-          
-          return "Deu certo brother";
-      }else {
-          return "Não deu bom";
-      }
-      
-
-      var_dump($json);
-  }
-}
-
-      //verificar dentro da página se tem alguma coisa dentro da página, pra vê se n tá vázio
-    //Por que vc colocou as informações do formulário no POST
-
-    if($_POST){   
-
-      //separar as iformações em variaveis para começar a usar
-      //salvando arquivo
-
-      $nomeImg = $_FILES['nomeImagem']['name'];
-      $localTmp = $_FILES['nomeImagem']['tmp_name'];
-
-      //onde os arquivo serão salvos
-      $dataAtual = date("d-m-y");
-      $caminhoSalvo='images/'.$dataAtual.$nomeImg;
-
-      //passando da onde ele tá, pra onde ele vai
-
-      $deuCerto = move_uploaded_file($localTmp, $caminhoSalvo);
-      
-      
-      echo cadastrarProduto($_POST['nomeProduto'],$_POST['nomeCategoria'], $_POST['nomeDescricao'], $_POST['nomeQuantidade'], $_POST['nomePreco'],$caminhoSalvo);
-} 
-
-$nomeArquivo="produto.json";
-$produtos = json_decode(file_get_contents($nomeArquivo),true);
-
-?>
-
+<?php require_once("funcoes.php"); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -98,15 +18,17 @@ $produtos = json_decode(file_get_contents($nomeArquivo),true);
 
 
 
-<section class="d-flex justify-content-end">
+<section class="container d-flex justify-content-center">
+<div class="row">
 
 <!---- Começoo da Tabela -------->
-
-
+<div class="col-7 pt-5 pr-5">
 
   <h1>Todos os Produtos</h1>
+  
   <table class="table">
-    <thead>
+  
+    <thead class="thead-light">
       <tr>
         <th scope="col">Nome</th>
         <th scope="col">Categoria</th>
@@ -116,24 +38,30 @@ $produtos = json_decode(file_get_contents($nomeArquivo),true);
     <tbody>
 
 <!-- COvertir json em array associativo e percorrer em um foreach-->
-
+      <?php if(isset($produtos)){ ?>
       <?php foreach($produtos as $produto) {?>
           <tr>
-            <td><?php echo $produto["nome"] ?></td>
-            <td><?php echo $produto["categoria"] ?></td>
-            <td><?php echo $produto["preco"] ?></td>
+            <td><a href="individual.php?id=<?php echo $produto['id']; ?>"><?php echo $produto['nomeProduto']; ?></a></td>
+            
+            <td><?php echo $produto["nomeCategoria"] ?></td>
+            <td><?php echo $produto["nomePreco"] ?></td>
           </tr>
+          <!-- Fechando o foreach -->
+      <?php } ?>
+          <!--- Fechando o if(isset) --->
+      <?php } else{ ?>
+      <h4>Não tem foto cadastrado</h4>
       <?php } ?>
         </tbody>
   </table>
+</div>
 
 <!-- /table -->
 
 <!---- Começoo do formuláriio ----->
 
-
-
-<form class=" col-4 bg-light " action="" method="post"  enctype="multipart/form-data" style="border: 1px solid red;">
+<div class="col-5 p-5 mt-5">
+<form class="bg-light " action="" method="post"  enctype="multipart/form-data" style="border: 1px solid red;">
 <h1>Cadastrar Produtos</h1>
   
 
@@ -158,7 +86,7 @@ $produtos = json_decode(file_get_contents($nomeArquivo),true);
       <label for="inputPassword4">Descrição</label>
       <input type="text" class="form-control" name="nomeDescricao" placeholder="#">
     </div>
-  </div>
+  
 
 
   <div class="form-group">
@@ -183,6 +111,8 @@ $produtos = json_decode(file_get_contents($nomeArquivo),true);
   <button type="submit" class="btn btn-primary">Sign in</button>
 
 </form>
+</div>
+</div>
 </section>
 <!---- Final do formuláriio ----->
 

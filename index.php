@@ -18,11 +18,11 @@
 
 
 
-<section class="container d-flex justify-content-center">
+<section class="container ">
 <div class="row">
 
 <!---- Começoo da Tabela -------->
-<div class="col-7 pt-5 pr-5">
+<div class="col-lg-6">
 
   <h1>Todos os Produtos</h1>
   
@@ -60,8 +60,8 @@
 
 <!---- Começoo do formuláriio ----->
 
-<div class="col-5 p-5 mt-5">
-<form class="bg-light " action="" method="post"  enctype="multipart/form-data" style="border: 1px solid red;">
+<div class="col-lg-6  bg-light">
+<form class="p-5 " action="" method="post"  enctype="multipart/form-data" >
 <h1>Cadastrar Produtos</h1>
   
 

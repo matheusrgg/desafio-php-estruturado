@@ -31,18 +31,7 @@
             
         }
         
-            
-        
-        
-        
-
-
-        
-
-
-
-
-        
+     
         //colocando o arquivo alterado em formato json
         $json = json_encode($produtos);
         

@@ -1,4 +1,4 @@
-Desafio proposto no curso de FullStack na DigitalHouse.</br>
+Desafio proposto no curso de Full Stack na DigitalHouse.</br>
 Um formulário para captar dados de um produto e produzir uma página com as informações de cada um com as opções de deletar e editar.
 
  
